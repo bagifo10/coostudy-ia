@@ -1,0 +1,174 @@
+/* ====================================
+   LAYOUT PRINCIPAL
+   ==================================== */
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+  background-color: var(--bg);
+}
+
+/* ====================================
+   SIDEBAR DERECHO
+   ==================================== */
+
+.topbar {
+  background: linear-gradient(90deg, #1f1f1f 0%, #242424 100%);
+  border-bottom: 1px solid var(--border);
+  padding: var(--gap-lg) var(--gap-2xl);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-lg);
+  width: 100%;
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* ====================================
+   PANEL PRINCIPAL
+   ==================================== */
+
+.main-panel {
+  display: flex;
+  flex-direction: column;
+  padding: var(--gap-lg) var(--gap-2xl);
+  gap: var(--gap-lg);
+  overflow: auto;
+  background-color: var(--bg);
+  min-height: calc(100vh - 90px);
+  position: relative;
+  z-index: 1;
+}
+
+.view.active {
+  padding: 0 0 0 var(--gap-lg);
+  box-sizing: border-box;
+}
+
+.section-wrapper {
+  padding: 0 var(--gap-lg);
+}
+
+/* ====================================
+   TOPBAR / HEADER
+   ==================================== */
+
+.topbar-left,
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+}
+
+.topbar .nav-list {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex: 1;
+}
+
+/* ====================================
+   VISTAS
+   ==================================== */
+
+.view {
+  display: none;
+  gap: var(--gap-lg);
+  flex: 1;
+  min-height: 0;
+}
+
+.view.active {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(180px, 1.2fr) minmax(220px, 1.6fr) minmax(120px, 1fr);
+  gap: var(--gap-lg);
+  animation: fadeIn var(--transition-normal);
+  height: 100%;
+  min-height: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ====================================
+   RESPONSIVE
+   ==================================== */
+
+@media (max-width: 1024px) {
+  .app-shell {
+    grid-template-columns: 200px 1fr;
+  }
+  
+  .sidebar {
+    padding: var(--gap-md) var(--gap-sm);
+  }
+  
+  .main-panel {
+    padding: var(--gap-md);
+    gap: var(--gap-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  
+  .sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: var(--gap-md);
+    height: auto;
+    max-height: 80px;
+    overflow-x: auto;
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+  }
+  
+  .brand {
+    display: none;
+  }
+  
+  .nav-list {
+    flex-direction: row;
+  }
+  
+  .main-panel {
+    padding: var(--gap-md);
+  }
+  
+  .view.active {
+    grid-template-rows: auto auto auto;
+  }
+}

@@ -1,0 +1,300 @@
+/* ====================================
+   PANELES
+   ==================================== */
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: calc(var(--gap-sm) + 0.25rem) var(--gap-lg) var(--gap-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+  margin: 0;
+}
+
+.panel:hover {
+  border-color: var(--border-light);
+}
+
+.panel h3 {
+  margin: 0 0 calc(var(--gap-xs) * 1.25) 0;
+  font-size: var(--text-size-base);
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding-bottom: var(--gap-xs);
+  border-bottom: 1px solid var(--border);
+}
+
+.panel-body {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  min-height: 0;
+  max-height: 100%;
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  transition: none;
+}
+
+#transcript-output,
+#chat-output,
+#latest-note {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+  overflow-y: auto;
+  min-height: 0;
+}
+
+#chat-output {
+  flex: 1;
+  padding-right: 0.25rem;
+}
+
+#latest-note {
+  min-height: 100px;
+}
+
+.chat-message {
+  padding: 0.75rem 0.9rem;
+  margin-bottom: 0.75rem;
+  border-radius: 14px;
+  line-height: 1.5;
+  max-width: 100%;
+  word-break: break-word;
+}
+
+.chat-user {
+  background: rgba(56, 116, 255, 0.12);
+  border: 1px solid rgba(56, 116, 255, 0.2);
+  align-self: flex-end;
+}
+
+.chat-assistant {
+  background: rgba(18, 18, 18, 0.06);
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  align-self: flex-start;
+}
+
+.panel-body:hover {
+  background: transparent;
+  border-color: transparent;
+}
+
+.panel-body p {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ====================================
+   COMPONENTES ESPECÍFICOS
+   ==================================== */
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: var(--gap-sm) var(--gap-md);
+  font-size: var(--text-size-sm);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.status-pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+#transcript-output,
+#chat-output,
+#latest-note {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+  overflow-y: auto;
+  min-height: 0;
+}
+
+#chat-output {
+  flex: 1;
+  padding-right: 0.25rem;
+}
+
+/* ====================================
+   TEXTO EN PANELES
+   ==================================== */
+
+.panel p {
+  color: var(--text-secondary);
+  font-size: var(--text-size-base);
+  line-height: 1.6;
+}
+
+.panel-body p {
+  margin: var(--gap-md) 0;
+  padding: var(--gap-md);
+  background: rgba(96, 165, 250, 0.05);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.panel-body p:hover {
+  background: rgba(96, 165, 250, 0.1);
+  padding-left: var(--gap-lg);
+}
+
+/* ====================================
+   BUTTONS
+   ==================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-sm);
+  padding: var(--gap-sm) var(--gap-lg);
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: var(--text-size-sm);
+}
+
+.btn:hover {
+  background: transparent;
+  color: var(--accent-light);
+  border-color: var(--accent-light);
+}
+
+.btn:active {
+  opacity: 0.8;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: transparent;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ====================================
+   INPUTS
+   ==================================== */
+
+input,
+textarea,
+select {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--gap-md);
+  color: var(--text);
+  font-family: var(--font-primary);
+  transition: all var(--transition-normal);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.1);
+}
+
+input::placeholder {
+  color: var(--muted);
+}
+
+/* ====================================
+   CARDS
+   ==================================== */
+
+.card {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--gap-lg);
+  transition: all var(--transition-normal);
+}
+
+.card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(96, 165, 250, 0.2);
+}
+
+/* ====================================
+   UTILIDADES
+   ==================================== */
+
+.flex {
+  display: flex;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gap-lg);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-lg);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-muted {
+  color: var(--muted);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.text-success {
+  color: var(--success);
+}
+
+.text-warning {
+  color: var(--warning);
+}
+
+.text-error {
+  color: var(--error);
+}

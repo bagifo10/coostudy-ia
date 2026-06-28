@@ -1,0 +1,13 @@
+{
+  "name": "coostudy",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Asistente de estudio desktop con arquitectura modular preparada para Electron.",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "node_modules\\electron\\dist\\electron.exe . --user-data-dir \"%TEMP%\\coostudy-electron\""
+  },
+  "devDependencies": {
+    "electron": "^35.7.5"
+  }
+}

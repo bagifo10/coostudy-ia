@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CooStudy</title>
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/sidebar.css" />
+    <link rel="stylesheet" href="./css/components.css" />
+  </head>
+  <body>
+    <div id="app" class="app-shell">
+      <header class="topbar" aria-label="Navegación principal">
+        <div class="topbar-left">
+          <div class="brand">
+            <img src="./assets/logo.png" alt="CooStudy" class="brand-logo" />
+            <div>
+              <h1>CooStudy</h1>
+              <p>Asistente de estudio</p>
+            </div>
+          </div>
+        </div>
+        <nav class="nav-list">
+          <button class="nav-item active" data-view="home" data-icon="🏠"><span>Inicio</span></button>
+          <button class="nav-item" data-view="models" data-icon="🧠"><span>Modelos</span></button>
+          <button class="nav-item" data-view="notes" data-icon="📝"><span>Notas</span></button>
+          <button class="nav-item" data-view="account" data-icon="👤"><span>Cuenta</span></button>
+          <button class="nav-item" data-view="settings" data-icon="⚙️"><span>Configuración</span></button>
+        </nav>
+        <div class="topbar-right">
+          <button id="assistant-toggle" class="btn">Iniciar asistente</button>
+        </div>
+      </header>
+
+      <main class="main-panel">
+
+        <section class="view active" data-view="home">
+          <div class="panel transcript-panel">
+            <h3>Transcript live</h3>
+            <div id="transcript-output" class="panel-body"></div>
+          </div>
+
+          <div class="panel chat-panel">
+            <h3>Chat IA</h3>
+            <div id="chat-output" class="panel-body"></div>
+          </div>
+
+          <div class="panel note-panel">
+            <h3>Última nota</h3>
+            <div id="latest-note" class="panel-body"></div>
+          </div>
+        </section>
+
+        <section class="view" data-view="models">
+          <div class="panel">
+            <h3>Modelos e inteligencia</h3>
+            <div class="panel-body">
+              <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+                <label>Modo:</label>
+                <select id="model-mode">
+                  <option value="local">Local</option>
+                  <option value="hybrid">Hybrid</option>
+                  <option value="cloud">Cloud</option>
+                </select>
+
+                <label>Inteligencia:</label>
+                <input id="model-level" type="range" min="1" max="5" value="3" />
+                <span id="model-level-label">3</span>
+
+                <label style="min-width:100px;">API Key:</label>
+                <input id="model-api-key" placeholder="API Key (solo si cloud)" style="flex:1; padding:0.4rem;" />
+
+                <button id="models-save" class="btn">Guardar</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="notes">
+          <div class="panel">
+            <h3>Notas</h3>
+            <div class="panel-body">
+              <form id="note-form" aria-label="Crear nota">
+                <div style="display:flex;gap:0.5rem;align-items:flex-start;">
+                  <input id="note-title" placeholder="Título" required style="flex:0 0 220px; padding:0.5rem;" />
+                  <textarea id="note-desc" placeholder="Descripción" rows="2" style="flex:1; padding:0.5rem;"></textarea>
+                  <button type="submit" class="btn" id="note-save">Guardar</button>
+                </div>
+              </form>
+
+              <div id="notes-list" style="margin-top:1rem;display:flex;flex-direction:column;gap:0.6rem;"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="account">
+          <div class="panel">
+            <h3>Cuenta</h3>
+            <p>Espacio preparado para login y perfil futuro.</p>
+          </div>
+        </section>
+
+        <section class="view" data-view="settings">
+          <div class="panel">
+            <h3>Configuración</h3>
+            <div class="panel-body">
+              <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+                <label>Micrófono:</label>
+                <select id="mic-select" style="min-width:260px;"></select>
+
+                <label>Tema:</label>
+                <select id="theme-select">
+                  <option value="dark">Dark</option>
+                  <option value="light">Light</option>
+                </select>
+
+                <button id="settings-save" class="btn">Guardar</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,276 @@
+Actúa como un Senior Software Architect y Senior Full Stack Engineer experto en Electron, JavaScript modular, arquitectura de desktop apps, UI/UX moderna y aplicaciones de inteligencia artificial en tiempo real.
+
+Tu rol en este proyecto:
+
+* Ser crítico con decisiones técnicas
+* Detectar problemas de arquitectura antes de implementarlos
+* Mantener código limpio, escalable y mantenible
+* Nunca asumir requisitos no especificados
+* Siempre hacer preguntas si hay dudas
+* Trabajar estrictamente por fases
+* Nunca generar todo el proyecto de una sola vez
+
+# CONTEXTO DEL PROYECTO
+
+Quiero construir una aplicación desktop para Windows usando Electron.
+
+Sin embargo, el desarrollo inicial será una web app usando:
+
+* HTML
+* CSS
+* JavaScript puro (sin React)
+
+IMPORTANTE:
+Aunque la primera versión sea web, TODO debe diseñarse pensando en una migración casi directa a Electron.
+
+Eso significa:
+
+* Separación estricta entre UI layer y system layer
+* Evitar dependencias browser-only que compliquen migración
+* Diseñar servicios abstractos para audio, memoria, IA y almacenamiento
+* Pensar desde el inicio en futura comunicación mediante Electron IPC (main / preload / renderer)
+
+La meta es que al migrar a Electron haya que modificar lo mínimo posible del frontend.
+
+# DESCRIPCIÓN DEL PRODUCTO
+
+La app será un asistente de estudio con inteligencia artificial.
+
+Su propósito es acompañar al usuario mientras estudia, practica programación o aprende conceptos nuevos.
+
+Debe comportarse como si el usuario tuviera un tutor profesional al lado.
+
+No es un chatbot tradicional.
+
+La IA debe:
+
+* Escuchar continuamente mientras el asistente esté activo
+* Analizar contexto en tiempo real
+* Dar feedback útil
+* Explicar conceptos
+* Corregir errores
+* Detectar dudas implícitas
+* Recordar conversaciones anteriores
+* Adaptarse al progreso del usuario
+
+La interacción debe sentirse natural y continua.
+
+# FLUJO PRINCIPAL
+
+1. El usuario abre la app
+2. Activa el asistente manualmente
+3. La app escucha el micrófono continuamente
+4. El speech-to-text transcribe en tiempo real
+5. El transcript se acumula en chunks
+6. Los chunks se procesan con IA
+7. La IA genera feedback escrito
+8. La IA puede generar notas automáticamente
+
+La IA NO habla.
+Solo responde por texto.
+
+# REQUISITOS DE IA
+
+La IA debe:
+
+* Tener memoria persistente entre sesiones
+* Recordar:
+
+  * historial de chats
+  * temas estudiados
+  * preferencias del usuario
+  * errores frecuentes
+
+Debe manejar frases incompletas.
+
+Ejemplo:
+Si recibe un chunk con una oración incompleta, no debe responder todavía y debe esperar más contexto.
+
+Esto requiere una futura Phrase Completion Layer.
+
+# MODO DE PROCESAMIENTO
+
+La app tendrá 3 modos:
+
+* Local
+* Hybrid
+* Cloud
+
+Local:
+
+* Máxima velocidad
+* Menor inteligencia
+
+Cloud:
+
+* Mayor inteligencia
+* Más latencia
+
+Hybrid:
+
+* Balance entre ambos
+
+También habrá un slider de inteligencia de 5 niveles.
+
+Ese slider modificará internamente:
+
+* tamaño de chunks
+* profundidad de reasoning
+* tamaño de contexto
+* frecuencia de respuestas
+
+# INTERFAZ (UI)
+
+La app tendrá sidebar derecho colapsable.
+
+Menú:
+
+* Inicio
+* Modelos / Inteligencia
+* Notas
+* Cuenta
+* Configuración
+
+# PANTALLA INICIO
+
+Debe tener 3 bloques verticales:
+
+1. Transcript live (arriba)
+   Mostrar texto transcripto en tiempo real.
+
+2. Chat IA (centro)
+   Mostrar respuestas de la IA.
+
+Reglas:
+
+* Visualmente mostrar las últimas 2 respuestas
+* Mantener historial completo con scroll interno
+* El scroll debe existir solo dentro del panel de chat
+* Nunca en toda la ventana
+
+3. Última nota (abajo)
+   Mostrar la nota más reciente generada o guardada.
+
+# PANTALLA MODELOS
+
+Debe incluir:
+
+Selector de modo:
+
+* Local
+* Hybrid
+* Cloud
+
+Slider de inteligencia:
+
+* 1 a 5
+
+Visualmente debe ser moderno y claro.
+
+# PANTALLA NOTAS
+
+Debe permitir:
+
+* Crear notas manualmente
+* Editar notas
+* Eliminar notas
+* Ver notas creadas por IA
+* Persistencia local
+
+# PANTALLA CUENTA
+
+Preparar estructura para futuro sistema de cuenta/login.
+
+Por ahora solo placeholder.
+
+# PANTALLA CONFIGURACIÓN
+
+Preparar estructura modular para futuras preferencias.
+
+# ARQUITECTURA DE CÓDIGO
+
+El proyecto debe ser modular.
+
+NO quiero un solo archivo JavaScript gigante.
+
+Separar por responsabilidades.
+
+Ejemplos de módulos posibles:
+
+* app manager
+* UI manager
+* navigation manager
+* transcript manager
+* chat manager
+* notes manager
+* memory manager
+* settings manager
+* AI service
+* storage service
+
+Podés proponer mejor estructura si creés que conviene.
+
+# REGLAS IMPORTANTES
+
+1. No generes todo el proyecto de una vez
+2. Trabajemos por fases
+3. Antes de generar código:
+
+   * analizar arquitectura
+   * proponer estructura de carpetas
+   * justificar decisiones
+4. Si detectás mala decisión técnica, decímelo
+5. Si faltan requisitos, preguntame
+6. No simplifiques arquitectura por comodidad
+7. Pensá como si esto fuera un producto real de alto nivel
+
+# ORDEN DE TRABAJO OBLIGATORIO
+
+Fase 1:
+Diseñar arquitectura y estructura de carpetas
+
+Fase 2:
+Crear HTML base
+
+Fase 3:
+Crear layout CSS
+
+Fase 4:
+Crear JavaScript modular base
+
+Fase 5:
+Integrar lógica real progresivamente
+
+Empezá exclusivamente por la Fase 1.
+No avances a Fase 2 hasta mi aprobación.
+
+
+## CARPETAS Y ARCHIVOS
+ai-study-assistant/
+│
+├── package.json
+│
+├── electron/
+│   ├── main.js
+│   └── preload.js
+│
+├── src/
+│   ├── index.html
+│   │
+│   ├── css/
+│   │   ├── main.css
+│   │   ├── layout.css
+│   │   ├── sidebar.css
+│   │   └── components.css
+│   │
+│   ├── js/
+│   │   ├── app.js
+│   │   ├── ui-manager.js
+│   │   ├── navigation-manager.js
+│   │   ├── transcript-manager.js
+│   │   ├── ai-manager.js
+│   │   ├── notes-manager.js
+│   │   ├── memory-manager.js
+│   │   └── settings-manager.js
+│   │
+│   └── assets/
