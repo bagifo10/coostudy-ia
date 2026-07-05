@@ -207,6 +207,97 @@
    INPUTS
    ==================================== */
 
+.info-text {
+  font-size: var(--text-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.4;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: rgba(255,255,255,0.04);
+}
+
+.info-text-default {
+  color: var(--text-secondary);
+}
+
+.info-text-success {
+  color: var(--success);
+  border-color: rgba(74, 222, 128, 0.25);
+  background: rgba(74, 222, 128, 0.08);
+}
+
+.info-text-warning {
+  color: var(--warning);
+  border-color: rgba(250, 204, 21, 0.25);
+  background: rgba(250, 204, 21, 0.08);
+}
+
+.transcript-status {
+  font-size: var(--text-size-base);
+  color: var(--text-secondary);
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  margin: 0;
+  background: rgba(255,255,255,0.03);
+}
+
+.transcript-status-warning {
+  color: var(--warning);
+  border-color: rgba(250, 204, 21, 0.24);
+  background: rgba(250, 204, 21, 0.08);
+}
+
+.transcript-status-default {
+  color: var(--text-secondary);
+}
+
+.transcript-status-muted {
+  color: var(--muted);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 1rem;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.overlay-panel {
+  width: min(540px, 100%);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--gap-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+.overlay-panel h2 {
+  margin: 0 0 var(--gap-sm) 0;
+  color: var(--text);
+}
+
+.overlay-panel p {
+  margin: 0 0 var(--gap-md) 0;
+  color: var(--text-secondary);
+}
+
+.overlay-actions {
+  display: flex;
+  gap: var(--gap-md);
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
 input,
 textarea,
 select {

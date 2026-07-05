@@ -37,9 +37,9 @@ export class MemoryManager {
     }
   }
 
-  getContext() {
+  getContext(maxHistory = 8) {
     return {
-      history: this.history.slice(-8).map(item => ({ role: item.role, content: item.text || '' })),
+      history: this.history.slice(-maxHistory).map(item => ({ role: item.role, content: item.text || '' })),
       topics: this.topics
     };
   }

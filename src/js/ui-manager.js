@@ -3,6 +3,8 @@ export class UIManager {
     this.viewTitle = document.getElementById('view-title');
     this.views = Array.from(document.querySelectorAll('.view'));
     this.navItems = Array.from(document.querySelectorAll('.nav-item'));
+    this.transcriptOutput = document.getElementById('transcript-output');
+    this.chatOutput = document.getElementById('chat-output');
   }
 
   init() {
@@ -10,13 +12,68 @@ export class UIManager {
   }
 
   renderHomeState() {
-    const transcript = document.getElementById('transcript-output');
-    const chat = document.getElementById('chat-output');
-    const note = document.getElementById('latest-note');
+    this.clearTranscript();
+    if (this.chatOutput) {
+      this.chatOutput.innerHTML = '<p>La IA aún no ha respondido.</p>';
+    }
+    this.updateLatestNote(null);
+  }
 
-    transcript.innerHTML = '<p>Esperando transcripción...</p>';
-    chat.innerHTML = '<p>La IA aún no ha respondido.</p>';
-    note.innerHTML = '<p>No hay notas disponibles aún.</p>';
+  clearTranscript() {
+    if (!this.transcriptOutput) return;
+    this.transcriptOutput.innerHTML = '<p class="muted">Esperando transcripción...</p>';
+  }
+
+  setTranscriptMessage(message, type = 'muted') {
+    if (!this.transcriptOutput) return;
+    this.transcriptOutput.innerHTML = `<p class="transcript-status transcript-status-${type}">${this.escape(message)}</p>`;
+  }
+
+  updateTranscriptLive(text, isFinal = false) {
+    if (!this.transcriptOutput) return;
+
+    if (this.transcriptOutput.textContent.includes('Esperando transcripción...') || this.transcriptOutput.querySelector('.transcript-status')) {
+      this.transcriptOutput.innerHTML = '';
+    }
+
+    if (isFinal) {
+      const interim = this.transcriptOutput.querySelector('.transcript-interim');
+      if (interim) {
+        interim.remove();
+      }
+      const line = document.createElement('p');
+      line.className = 'transcript-line';
+      line.textContent = text;
+      this.transcriptOutput.appendChild(line);
+      this.transcriptOutput.scrollTop = this.transcriptOutput.scrollHeight;
+      return;
+    }
+
+    let interim = this.transcriptOutput.querySelector('.transcript-interim');
+    if (!interim) {
+      interim = document.createElement('p');
+      interim.className = 'transcript-interim';
+      this.transcriptOutput.appendChild(interim);
+    }
+    interim.textContent = text;
+    this.transcriptOutput.scrollTop = this.transcriptOutput.scrollHeight;
+  }
+
+  appendChatMessage(text, role = 'assistant') {
+    if (!this.chatOutput) return;
+    if (this.chatOutput.textContent.includes('La IA aún no ha respondido.')) {
+      this.chatOutput.innerHTML = '';
+    }
+    const el = document.createElement('div');
+    el.className = 'chat-message';
+    if (role === 'user') {
+      el.classList.add('chat-user');
+    } else {
+      el.classList.add('chat-assistant');
+    }
+    el.textContent = text;
+    this.chatOutput.appendChild(el);
+    this.chatOutput.scrollTop = this.chatOutput.scrollHeight;
   }
 
   updateLatestNote(noteData) {

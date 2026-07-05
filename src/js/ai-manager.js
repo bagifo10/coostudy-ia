@@ -1,29 +1,22 @@
 export class AIManager {
-  constructor(aiService, memoryManager, notesManager, storageService) {
-    this.outputEl = document.getElementById('chat-output');
+  constructor(aiService, memoryManager, notesManager, storageService, uiManager) {
     this.aiService = aiService;
     this.memoryManager = memoryManager;
     this.notesManager = notesManager;
     this.storageService = storageService;
+    this.uiManager = uiManager;
     this.buffer = '';
     this.thinking = false;
   }
 
   appendToChat(text, meta = {}) {
-    if (!this.outputEl) return;
-    const el = document.createElement('div');
-    el.className = 'chat-message';
-    if (meta.role === 'user') {
-      el.classList.add('chat-user');
-    } else {
-      el.classList.add('chat-assistant');
+    const role = meta.role === 'user' ? 'user' : 'assistant';
+    if (this.uiManager && typeof this.uiManager.appendChatMessage === 'function') {
+      this.uiManager.appendChatMessage(text, role);
     }
-    el.textContent = text;
-    this.outputEl.appendChild(el);
-    this.outputEl.scrollTop = this.outputEl.scrollHeight;
     if (this.storageService) {
       const chat = this.storageService.loadChatHistory();
-      chat.push({ role: meta.role || 'assistant', text, ts: Date.now() });
+      chat.push({ role: role, text, ts: Date.now() });
       this.storageService.saveChatHistory(chat);
     }
   }

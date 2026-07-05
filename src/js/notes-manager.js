@@ -7,11 +7,13 @@ export class NotesManager {
     this.descInput = document.getElementById('note-desc');
     this.notes = [];
     this.editingId = null;
+    this.onChange = null;
   }
 
   init() {
     this.load();
     this.render();
+    this.notifyChange();
     this.form.addEventListener('submit', (e) => {
       e.preventDefault();
       this.saveFromForm();
@@ -24,6 +26,13 @@ export class NotesManager {
 
   persist() {
     if (this.storageService) this.storageService.saveNotes(this.notes);
+    this.notifyChange();
+  }
+
+  notifyChange() {
+    if (typeof this.onChange === 'function') {
+      this.onChange();
+    }
   }
 
   saveFromForm() {
